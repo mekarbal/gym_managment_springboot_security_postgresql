@@ -3,10 +3,14 @@ package com.projects.gym_management.controllers;
 import com.projects.gym_management.dtos.CreatePaymentRequest;
 import com.projects.gym_management.dtos.PayementResponse;
 import com.projects.gym_management.dtos.PayementsListResponse;
+import com.projects.gym_management.dtos.StatisticsResponse;
 import com.projects.gym_management.services.PayementService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/v1/payments")
@@ -40,5 +44,17 @@ public class PayementController {
         PayementResponse payementResponse=payementService.getPayementById(payementId);
         return new ResponseEntity<>(payementResponse,HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/revenue-statistics")
+    public StatisticsResponse getRevenueStatistics(
+            @RequestParam(value = "startDate", required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+
+            @RequestParam(value = "endDate", required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+
+        return payementService.getStatistics(startDate, endDate);
+    }
+
 
 }
