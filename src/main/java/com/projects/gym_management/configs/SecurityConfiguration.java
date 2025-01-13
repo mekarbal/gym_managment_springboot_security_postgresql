@@ -15,12 +15,6 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 
 import static com.projects.gym_management.entities.Role.ADMIN;
-import static com.projects.gym_management.entities.Role.MANAGER;
-import static com.projects.gym_management.enums.Permission.*;
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
