@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                                .requestMatchers("/api/v1/payments/**").hasAnyRole(ADMIN.name())
+                                .requestMatchers("/api/v1/payments/**","/api/v1/users/update-role").hasAnyRole(ADMIN.name())
                                 .anyRequest()
                                 .authenticated()
                 )

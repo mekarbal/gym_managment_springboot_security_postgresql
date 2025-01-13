@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projects.gym_management.dtos.AuthenticationRequest;
 import com.projects.gym_management.dtos.AuthenticationResponse;
 import com.projects.gym_management.dtos.RegisterRequest;
+import com.projects.gym_management.entities.Role;
 import com.projects.gym_management.entities.Token;
 import com.projects.gym_management.entities.User;
 import com.projects.gym_management.enums.TokenType;
@@ -19,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+
+import static com.projects.gym_management.entities.Role.USER;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +42,7 @@ public class AuthenticationService {
                     .lastname(request.getLastname())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
-                    .role(request.getRole())
+                    .role(USER)
                     .build();
 
             var savedUser = repository.save(user);

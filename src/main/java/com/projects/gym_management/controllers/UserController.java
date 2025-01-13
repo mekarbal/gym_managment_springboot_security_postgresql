@@ -1,11 +1,13 @@
 package com.projects.gym_management.controllers;
 
 import com.projects.gym_management.dtos.ChangePasswordRequest;
+import com.projects.gym_management.dtos.UpdateRoleRequest;
 import com.projects.gym_management.dtos.UserResponse;
 import com.projects.gym_management.entities.User;
 import com.projects.gym_management.mappers.UserMapper;
 import com.projects.gym_management.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,4 +37,11 @@ public class UserController {
         List<User> users= userService.getUsers();
         return ResponseEntity.ok().body(userMapper.toDtoList(users));
     }
+
+    @PutMapping("/update-role")
+    public ResponseEntity<?> updateUserRole(@RequestBody UpdateRoleRequest updateRoleRequest ) {
+         userService.updateUserRole(updateRoleRequest.getEmail(), updateRoleRequest.getRole());
+        return ResponseEntity.ok().build();
+    }
+
 }
