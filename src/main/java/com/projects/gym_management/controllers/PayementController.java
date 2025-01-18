@@ -5,6 +5,7 @@ import com.projects.gym_management.dtos.PayementResponse;
 import com.projects.gym_management.dtos.PayementsListResponse;
 import com.projects.gym_management.dtos.StatisticsResponse;
 import com.projects.gym_management.services.PayementService;
+import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class PayementController {
     }
 
     @PostMapping
-    public ResponseEntity<PayementResponse> createPayment(@RequestBody CreatePaymentRequest request) {
+    public ResponseEntity<PayementResponse> createPayment(@Valid @RequestBody CreatePaymentRequest request) {
         PayementResponse paymentResponse = payementService.createPayment(request);
         return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
     }

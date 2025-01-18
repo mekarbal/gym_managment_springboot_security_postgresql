@@ -1,8 +1,6 @@
 package com.projects.gym_management.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -32,6 +30,7 @@ public class User implements UserDetails {
     @Email(message = "Invalid email format.")
     private String email;
     private String password;
+    private String cin;
 
     @Enumerated(EnumType.STRING)
     private Role role;

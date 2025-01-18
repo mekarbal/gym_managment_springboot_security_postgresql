@@ -42,6 +42,7 @@ public class AuthenticationService {
                     .lastname(request.getLastname())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
+                    .cin(request.getCin())
                     .role(USER)
                     .build();
 
@@ -58,6 +59,7 @@ public class AuthenticationService {
                     .email(savedUser.getEmail())
                     .firstname(savedUser.getFirstname())
                     .lastname(savedUser.getLastname())
+                    .cin(savedUser.getCin())
                     .role(savedUser.getRole())
                     .build();
 
@@ -88,6 +90,7 @@ public class AuthenticationService {
                 .email(user.getEmail())
                 .firstname(user.getFirstname())
                 .lastname(user.getLastname())
+                .cin(user.getCin())
                 .role(user.getRole())
                 .build();
     }

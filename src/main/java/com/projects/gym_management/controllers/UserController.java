@@ -6,8 +6,8 @@ import com.projects.gym_management.dtos.UserResponse;
 import com.projects.gym_management.entities.User;
 import com.projects.gym_management.mappers.UserMapper;
 import com.projects.gym_management.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +25,7 @@ public class UserController {
 
     @PatchMapping
     public ResponseEntity<?> changePassword(
-            @RequestBody ChangePasswordRequest request,
+        @Valid @RequestBody ChangePasswordRequest request,
             Principal connectedUser
     ) {
         service.changePassword(request, connectedUser);
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping("/update-role")
-    public ResponseEntity<?> updateUserRole(@RequestBody UpdateRoleRequest updateRoleRequest ) {
+    public ResponseEntity<?> updateUserRole(@Valid @RequestBody UpdateRoleRequest updateRoleRequest ) {
          userService.updateUserRole(updateRoleRequest.getEmail(), updateRoleRequest.getRole());
         return ResponseEntity.ok().build();
     }
