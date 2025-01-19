@@ -7,13 +7,14 @@ import com.projects.gym_management.exceptions.RoleNotFoundException;
 import com.projects.gym_management.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,14 +38,16 @@ public class UserService {
         repository.save(user);
     }
 
-    public List<User> getUsers() {
+    public Page<User> getUsers(String name, String cin, int page, int perPage) {
         try {
-            return repository.findAll();
+            if ((name == null || name.isEmpty()) && (cin == null || cin.isEmpty())) {
+                return repository.findAll(PageRequest.of(page, perPage));
+            }
+            return repository.findBySearchCriteria(name, cin, PageRequest.of(page, perPage));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error fetching users: " + e.getCause().getMessage(), e);
         }
     }
-
     @Transactional
     public void updateUserRole(String email, String roleName) {
         Role role;
